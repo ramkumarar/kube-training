@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greet-app
+  labels:
+    app: greet-app
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: greet-app
+      labels:
+        app: greet-app
+    spec:
+      containers:
+        - name: greet-app
+          image: localhost:32000/quarkus/greeting-ms-jvm
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: greet-app

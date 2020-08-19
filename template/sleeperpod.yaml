@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine-sleeper
+  labels:
+    app: alpine-sleeper
+    tier: backend
+spec:
+  containers:
+    - name: alpine-sleeper
+      image: localhost:32000/alpine-sleeper
+      command:
+        - "ls"
+      args:
+        - "-l"
+      imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+
+
+
+
+

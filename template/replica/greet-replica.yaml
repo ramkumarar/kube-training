@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: greeting-replicaset
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: greeting-pod
+      labels:
+        app: greeting-server
+        tier: backend
+    spec:
+      containers:
+        - name: greeting-container
+          image: localhost:32000/quarkus/greeting-ms-jvm
+  selector:
+    matchLabels:
+      app: greeting-server
+      tier: backend
+
+

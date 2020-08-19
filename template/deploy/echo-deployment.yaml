@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-app
+  labels:
+    app: echo-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: echo-app
+      labels:
+        app: echo-app
+    spec:
+      containers:
+        - name: echo-app
+          image: localhost:32000/sboot/echo-server:latest
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "250m"
+            limits:
+              memory: "250Mi"
+              cpu: "300m"
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: echo-app

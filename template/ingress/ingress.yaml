@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: http-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    - host: mylocal.info
+      http:
+        paths:
+          - path: /app1(/|$)(.*)
+            backend:
+              serviceName: echo-server
+              servicePort: 8080
+          - path: /app2(/|$)(.*)
+            backend:
+              serviceName: greeting-ms
+              servicePort: 8080
+
+

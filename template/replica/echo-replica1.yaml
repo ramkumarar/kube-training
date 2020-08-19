@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: echo-server-rs
+  labels:
+    app: echo-server
+    tier: backend
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: echo-pod
+      labels:
+        app: echo-server
+        tier: backend
+    spec:
+      containers:
+        - name: echo-container
+          image: localhost:32000/sboot/echo-server
+  selector:
+    matchLabels:
+      app: echo-server
+      tier: backend
+
+

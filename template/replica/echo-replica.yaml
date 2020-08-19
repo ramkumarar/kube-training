@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: echo-server-rc
+  labels:
+    app: echo-server
+    tier: backend
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: echo-server-pod
+      labels:
+        app: echo-server
+        tier: backend
+    spec:
+      containers:
+        - name: echo-server-container
+          image: localhost:32000/sboot/echo-server
+
+

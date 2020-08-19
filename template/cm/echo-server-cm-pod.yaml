@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: echo-server
+  labels:
+    app: echo-server
+    tier: backend
+spec:
+  containers:
+    - name: echo-server
+      image: localhost:32000/sboot/echo-server:latest
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: echo-secret-config
+              key: db.username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: echo-secret-config
+              key: db.password
+      envFrom:
+        - configMapRef:
+            name: echo-config
+      volumeMounts:
+        - mountPath: "/app/resources"
+          name: app-config
+          readOnly: true
+  restartPolicy: Always
+  volumes:
+    - name: app-config
+      configMap:
+        name: echo-app-config
+
+
+
+
+
+
